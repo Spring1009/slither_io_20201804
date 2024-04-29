@@ -1289,6 +1289,7 @@ GameObject:
   - component: {fileID: 1528497655}
   - component: {fileID: 1528497654}
   - component: {fileID: 1528497656}
+  - component: {fileID: 1528497657}
   m_Layer: 0
   m_Name: Worm
   m_TagString: Player
@@ -1419,6 +1420,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1528497657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528497650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7378e4726689fc24f9cbaedc77c7e5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1551152405
 PrefabInstance:
   m_ObjectHideFlags: 0
