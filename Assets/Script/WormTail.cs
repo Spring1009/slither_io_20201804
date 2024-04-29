@@ -11,8 +11,6 @@ public class WormTail : MonoBehaviour
 	public List<Transform> wormTail= new List<Transform>();
 	private List<Vector2> positions = new List<Vector2>();
 
-	private int sortingOrder = 0; // 레이어 순서를 나타내는 변수
-
 	private void Start()
 	{
 		positions.Add(WormHeadGfx.position);
@@ -48,6 +46,6 @@ public class WormTail : MonoBehaviour
 		positions.Add(tail.position);
 
 		// 새로운 tail에 Sorting Order를 설정하여 앞서 생성된 gfx들보다 뒤에 나타나도록 함
-        tail.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder--;
+		tail.GetComponentInChildren<SpriteRenderer>().sortingOrder = (wormTail.Count * -1);
 	}
 }
