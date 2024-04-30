@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class WormCollision : MonoBehaviour
 {
-    public static List<List<Transform>> worms = new();
+    public static List<List<Vector2>> worms = new();
     public static List<float> wormRadiuses = new();
 
     // worms 리스트에 각 지렁이들의 몸통 리스트들을 저장, 반지름도 함께 저장함에 따라 같은 인덱스로 같은 지렁이에 접근 가능
-    public static void AddWorms(List<Transform> _worm, ref float _wormRadius)
+    public static void AddWorms(List<Vector2> _worm, ref float _wormRadius)
     { 
         worms.Add(_worm);
         wormRadiuses.Add(_wormRadius);
@@ -19,27 +19,42 @@ public class WormCollision : MonoBehaviour
     
     void Update()
     {
+        CheckWormsCollision();
+    }
+
+    private void CheckWormsCollision()
+    {
         // 각 지렁이별 반복문
-        for(int j = 0; j < worms.Count; j++)
+        for (int j = 0; j < worms.Count; j++)
         {
             // 이 스크립트가 붙어있는 오브젝트가 지렁이이고, 현재 worms 리스트의 j 인덱스가 자신과 같은 지렁이일경우 다음으로 패스
             if (GetComponent<WormTail>() != null)
             {
-                if (worms[j].SequenceEqual(GetComponent<WormTail>().wormTail))
+                if (worms[j].SequenceEqual(GetComponent<WormTail>().positions))
                 {
                     continue;
                 }
             }
 
             //현재 worms 리스트의 j 인덱스에 있는 각 몸통들을 통한 충돌 연산
-            List<Transform> _worm = worms[j];
+            List<Vector2> _worm = worms[j];
 
-            for (int i = 1; i < _worm.Count; i++)
+            for (int i = 0; i < _worm.Count; i++)
             {
-                Debug.Log(_worm.Count);
+                Vector3 start;
+                Vector3 end;
+                if(i == 0)
+                {
+                    start = _worm[i];
+                    end = _worm[i];
+                }
+                else
+                {
+                    start = _worm[i - 1];
+                    end = _worm[i];
+                }
                 // 자신 앞 인덱스와 자신 인덱스 간의 위치를 통해 충돌 감지
-                Vector3 start = _worm[i - 1].position;
-                Vector3 end = _worm[i].position;
+                
 
                 Vector3 lineDirection = end - start;
                 Vector3 circleDirection = transform.position - start;
@@ -82,6 +97,5 @@ public class WormCollision : MonoBehaviour
                 }
             }
         }
-        
     }
 }
