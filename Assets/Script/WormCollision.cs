@@ -10,7 +10,7 @@ public class WormCollision : MonoBehaviour
     public static List<float> wormRadiuses = new();
 
     // worms 리스트에 각 지렁이들의 몸통 리스트들을 저장, 반지름도 함께 저장함에 따라 같은 인덱스로 같은 지렁이에 접근 가능
-    public static void AddWorms(ref List<Transform> _worm, ref float _wormRadius)
+    public static void AddWorms(List<Transform> _worm, ref float _wormRadius)
     { 
         worms.Add(_worm);
         wormRadiuses.Add(_wormRadius);
@@ -36,7 +36,8 @@ public class WormCollision : MonoBehaviour
 
             for (int i = 1; i < _worm.Count; i++)
             {
-                // 자신 앞 인덱스 - 자신 인덱스 간의 위치를 통해 충돌 감지
+                Debug.Log(_worm.Count);
+                // 자신 앞 인덱스와 자신 인덱스 간의 위치를 통해 충돌 감지
                 Vector3 start = _worm[i - 1].position;
                 Vector3 end = _worm[i].position;
 
